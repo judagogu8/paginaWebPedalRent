@@ -6,9 +6,21 @@
     border-color: blue;
     border-style: double;
     border-radius: 10px;
+    background-color: lightblue;
 }
+.imagen-logo{
+    width: 100px;
+}
+.fondo{
+    background-color:beige;
+}
+
 h5 {
     font-family: "Freeman", sans-serif;
     font-size: 20px;
     color:blue;
+}
+
+.contenedor{
+    background-color: transparent;
 }
