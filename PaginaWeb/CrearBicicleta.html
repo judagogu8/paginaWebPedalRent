@@ -18,7 +18,7 @@
     <body>
         <header>
             <nav>
-                <ul>
+                <ul class="listaSuperior">
                     <li><a href="index.html">Menu</a></li>
                     <li><a href="rentar_bici.html">Rentar bici</a></li>
                     <li><a href="crear_bici.html">Crear Bici</a></li>
@@ -37,18 +37,45 @@
             
             <!--Poner una caja -->
             <!--AGREGAR LA ACCION A UN COMANDO QUE PERMITA GUARDAR LA BICICLETA-->
-            <form action="/CrearBicicleta" class="contenedor">
-                <h5>Modelo</h5>
+            <form class="contenedor">
+                <h2>Modelo</h2>
                 <input type="text" placeholder="Escriba el modelo de la Bicicleta" required>
-                <h5>Estado</h5>
+                <h2>Estado</h2>
                 <input type="text" placeholder="Escriba el estado de la Bicicleta" required>
-                <h5>ID de la estación</h5>
+                <h2>ID de la estación</h2>
                 <input type="text" placeholder="Escriba el ID de la estación" required>
-                <div class="buttons">
-                    <button type="submit">Crear Bicicleta</button>
-                    <button type="button" onclick="location.href='index.html'">Ir menu</button>
-                </div>
+                
             </form>
+            <div class="buttons">
+                <button type="button" onclick="enviarFormulario()">Crear Bicicleta</button>
+                <button type="button" onclick="location.href='index.html'" >Ir menu</button>
+            </div>
+            <script>
+                function enviarFormulario() {
+                    const nombre = document.getElementsByName('nombre')[0].value;
+                    const direccion = document.getElementsByName('direccion')[0].value;
+
+                    const requestBody = {
+                        nombre : nombre,
+                        direccion : direccion,
+                    };
+        
+                    fetch('/estaciones', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(requestBody)
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            </script>
     
         </div>
         </main>
