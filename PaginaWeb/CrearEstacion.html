@@ -1,10 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
+    
     <head>
-        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Crear Estacion PedalRent
+        </title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Freeman&family=Poetsen+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>hola mundo</h1>
+        <header>
+            <nav>
+                <ul class="listaSuperior">
+                    <li><a href="index.html">Menu</a></li>
+                    <li><a href="CrearBicicleta.html">Crear Bici</a></li>
+                    <li><a href="CrearEstacion.html">Crear Estacion</a></li>
+                    <li><a href="alquilar_bici.html">Alquilar bici</a></li>
+                    <li><a href="devolver_bici.html">Devolver bici</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+        <div class="fondo">
+            <div class="borde-especial">
+                <img class="imagen-logo" src="/PaginaWeb/Imagenes/logoPedalRent.png" alt="Logo PedalRent">
+                <h1>Crear Estación</h1>
+            </div>
+            
+            <form class="contenedor">
+                <h2>Nombre estación</h2>
+                <input type="text" placeholder="Escriba el nombre de la Estacion" name="nombre" required>
+                <h2>Dirección estación</h2>
+                <input type="text" placeholder="Escriba la dirección de la estación" name="direccion" required>
+                
+            </form>
+            <div class="buttons">
+                <button type="button" onclick="enviarFormulario()">Crear Estacion</button>
+                <button type="button" onclick="location.href='index.html'" >Ir menu</button>
+            </div>
+            <script>
+                function enviarFormulario() {
+                    const nombre = document.getElementsByName('nombre')[0].value;
+                    const direccion = document.getElementsByName('direccion')[0].value;
 
+                    const requestBody = {
+                        nombre : nombre,
+                        direccion : direccion,
+                    };
+        
+                    fetch('/estaciones', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(requestBody)
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            </script>
+    
+        </div>
+        </main>
+        
     </body>
 </html>
